@@ -1,8 +1,0 @@
-{
-  "name": "ayugram-church-app",
-  "version": "1.0.0",
-  "description": "Приложение церкви Великая жатва",
-  "engines": {
-    "node": "26.x"
-  }
-}
