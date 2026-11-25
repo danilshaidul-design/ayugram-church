@@ -11,12 +11,13 @@ app.use((req, res, next) => {
   next();
 });
 
-// Статические файлы (вся папка проекта)
-app.use(express.static(path.resolve(__dirname, '.')));
+// Статические файлы (вся папка проекта, кроме api)
+app.use(express.static(path.resolve(__dirname, '..')));
 
 // SPA fallback - все остальные маршруты ведут на index.html
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'index.html'));
+  res.sendFile(path.resolve(__dirname, '..', 'index.html'));
 });
 
 module.exports = app;
+
