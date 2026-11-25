@@ -1,9 +1,7 @@
 const express = require('express');
 const path = require('path');
-const os = require('os');
 
 const app = express();
-const PORT = 3000;
 
 // Отключаем кэш для разработки
 app.use((req, res, next) => {
@@ -21,22 +19,12 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-const getLocalIP = () => {
-  const interfaces = os.networkInterfaces();
-  for (const name of Object.keys(interfaces)) {
-    for (const iface of interfaces[name]) {
-      if (iface.family === 'IPv4' && !iface.internal) {
-        return iface.address;
-      }
-    }
-  }
-  return 'localhost';
-};
+// Для локального запуска
+const PORT = process.env.PORT || 3000;
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
 
-app.listen(PORT, () => {
-  const ip = getLocalIP();
-  console.log(`\n✅ Сервер запущен!\n`);
-  console.log(`📱 Локально: http://localhost:${PORT}`);
-  console.log(`🌐 Для других в сети: http://${ip}:${PORT}\n`);
-  console.log(`Дайте этот адрес другим людям, чтобы они зашли на сайт.`);
-});
+module.exports = app;
