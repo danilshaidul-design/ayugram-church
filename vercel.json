@@ -8,18 +8,20 @@
   },
   "routes": [
     {
-      "src": "/fonts/(.*)",
-      "dest": "/fonts/$1",
-      "headers": {
-        "cache-control": "public, max-age=31536000"
-      }
+      "src": "/fonts/.*",
+      "dest": "/fonts/$1"
     },
     {
-      "src": "/icon-.*\\.png",
-      "dest": "$0",
-      "headers": {
-        "cache-control": "public, max-age=31536000"
-      }
+      "src": "/icon.*\\.png",
+      "dest": "$0"
+    },
+    {
+      "src": "/manifest\\.webmanifest",
+      "dest": "/manifest.webmanifest"
+    },
+    {
+      "src": "/sw\\.js",
+      "dest": "/sw.js"
     },
     {
       "src": "/(.*)",
@@ -27,3 +29,4 @@
     }
   ]
 }
+
